@@ -73,8 +73,8 @@ public class FsUpAndDown {
 			// getDirectoryFromHdfs("/user");
 
 			//uploadFileToHdfs("C:/Users/HC/Downloads/hadoop.txt", "/user");
-			//getDirectoryFromHdfs("/user");
-			 downLoadFileFromHDFS("hdfs://192.168.220.10:9090/user/hello.txt");
+			getDirectoryFromHdfs("/user");
+			 //downLoadFileFromHDFS("hdfs://192.168.220.10:9090/user/hello.txt");
               
         } catch (Exception e) {  
             // TODO 自动生成的 catch 块  

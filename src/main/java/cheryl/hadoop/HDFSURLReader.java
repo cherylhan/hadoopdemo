@@ -16,7 +16,7 @@ public class HDFSURLReader {
 	}
 	public static void main(String[] args) {
 		InputStream in=null;
-		String url=HadoopUtil.URL+"/user/hello.txt";
+		String url=HadoopUtil.URL+"/tmp/mapreduce.txt";
 		try {
 			in=new URL(url).openStream();
 			IOUtils.copyBytes(in, System.out, 1024,false);

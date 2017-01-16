@@ -20,7 +20,7 @@ public class ListAllFile {
 	for(int i=0;i<paths.length;i++){
 		paths[i]=new Path(args[i]);
 	}
-	//获取路径状态
+	//获取路径状态 
 	FileStatus[] status=fs.listStatus(paths);
 	Path[] listedPaths=FileUtil.stat2Paths(status);
 	for(Path p:listedPaths){
