@@ -11,7 +11,11 @@ import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+
+import cheryl.dhcc.mapreduce.GbkOutputFormat;
+import cheryl.hadooputil.TransformtoUtf8;
 
 public class WordCount {
 //单词统计
@@ -20,12 +24,20 @@ public class WordCount {
 //对输入的文件进行处理
     private final static IntWritable one = new IntWritable(1);
     private Text word = new Text();
+    private FileSplit split;
+    private String dirName;
 //索引号 本行文本 输出上下文
     public void map(Object key, Text value, Context context
                     ) throws IOException, InterruptedException {
-      StringTokenizer itr = new StringTokenizer(value.toString());
+    	Text next=TransformtoUtf8.transformTextToUTF8(value,"GBK");
+    	split = (FileSplit)context.getInputSplit();
+    	dirName=split.getPath().toString();
+    	String line=next.toString();
+    	line=line.replaceAll("[^(0-9\\u4e00-\\u9fa5)]"," ");
+    	line=line.replaceAll("//s{2,}"," ");
+      StringTokenizer itr = new StringTokenizer(line);
       while (itr.hasMoreTokens()) {
-        word.set(itr.nextToken());
+        word.set(itr.nextToken()+"::"+dirName);
         context.write(word, one);
       }
     }
@@ -54,6 +66,7 @@ public class WordCount {
     job.setMapperClass(TokenizerMapper.class);
     job.setCombinerClass(IntSumReducer.class);
     job.setReducerClass(IntSumReducer.class);
+    job.setOutputFormatClass(GbkOutputFormat.class);
     job.setOutputKeyClass(Text.class);
     job.setOutputValueClass(IntWritable.class);
     FileInputFormat.addInputPath(job, new Path(args[0]));
