@@ -32,7 +32,7 @@ public class LeaderSelectorZkClient
 	//启动的服务个数
     private static final int        CLIENT_QTY = 10;
     //zookeeper服务器的地址
-    private static final String     ZOOKEEPER_SERVER = "192.168.220.10:2181";
+    private static final String     ZOOKEEPER_SERVER = "172.19.19.70:2181";
     
        
     public static void main(String[] args) throws Exception
