@@ -22,7 +22,7 @@ import cheryl.hadoop.WordCount.Combiner;
 import cheryl.hadoop.WordCount.IntSumReducer;
 import cheryl.hadoop.WordCount.TokenizerMapper;
 import cheryl.hadooputil.TransformtoUtf8;
-//仅统计单词的词频
+//仅统计单词的词频 统计所有单词的词频
 public class DHWordCount {
 	public static class TokenizerMapper extends Mapper<Object, Text, Text, IntWritable> {
 

@@ -47,7 +47,7 @@
 			<artifactId>hadoop-mapreduce-client-common</artifactId>
 			<version>2.7.3</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>jdk.tools</groupId>
 			<artifactId>jdk.tools</artifactId>
@@ -67,4 +67,42 @@
 		</dependency>
 
 	</dependencies>
+	<build>  
+    <plugins>  
+  
+        <plugin>  
+            <groupId>org.apache.maven.plugins</groupId>  
+            <artifactId>maven-assembly-plugin</artifactId>  
+            <version>2.5.5</version>  
+            <configuration>  
+                <archive>  
+                    <manifest>  
+                        <mainClass>cheryl.dhcc.mapreduce.DHAWord</mainClass>  
+                    </manifest>  
+                </archive>  
+                <descriptorRefs>  
+                    <descriptorRef>jar-with-dependencies</descriptorRef>  
+                </descriptorRefs>  
+            </configuration>  
+        </plugin>  
+  		  <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-shade-plugin</artifactId>
+    <version>2.3</version>
+    <executions>
+      <execution>
+        <phase>package</phase>
+        <goals>
+          <goal>shade</goal>
+        </goals>
+        <configuration>
+          <transformers>
+            <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+          </transformers>
+        </configuration>
+      </execution>
+    </executions>
+  </plugin>
+    </plugins>  
+</build>  
 </project>
