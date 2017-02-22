@@ -77,7 +77,7 @@ public class InvertedIndex {
 		public static void main(String[] args) throws Exception {
 			Configuration conf = new Configuration();
 			Job job = Job.getInstance(conf, "word count");
-			job.setJarByClass(WordCount.class);
+			job.setJarByClass(InvertedIndex.class);
 			job.setMapperClass(TokenizerMapper.class);
 			job.setCombinerClass(Combiner.class);
 			job.setReducerClass(IntSumReducer.class);
