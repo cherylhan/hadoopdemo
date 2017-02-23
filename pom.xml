@@ -77,7 +77,7 @@
             <configuration>  
                 <archive>  
                     <manifest>  
-                        <mainClass>cheryl.dhcc.mapreduce.DHAWord</mainClass>  
+                        <mainClass>cheryl.dhcc.mapreduce.TwoMapReduce</mainClass>  
                     </manifest>  
                 </archive>  
                 <descriptorRefs>  
