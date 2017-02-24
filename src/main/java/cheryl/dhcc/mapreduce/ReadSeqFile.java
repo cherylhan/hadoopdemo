@@ -11,10 +11,8 @@ import org.apache.hadoop.io.IOUtils;
 import org.apache.hadoop.io.SequenceFile;
 import org.apache.hadoop.io.SequenceFile.Reader;
 
-import cheryl.hadooputil.TransformtoUtf8;
-
 import org.apache.hadoop.io.Text;
-
+// 读取sequence file key为文件名 value为原来的文本内容
 public class ReadSeqFile {
 	public static void main(String[] args) throws IOException, URISyntaxException {
 		Configuration conf = new Configuration();

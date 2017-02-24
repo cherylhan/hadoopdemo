@@ -14,7 +14,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>cheryl.dhcc.mapreduce.TwoMapReduce</mainClass>
+              <mainClass>cheryl.dhcc.mapreduce.MapReduceReadFile</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>

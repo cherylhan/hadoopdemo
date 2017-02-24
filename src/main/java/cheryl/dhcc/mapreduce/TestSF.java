@@ -12,6 +12,7 @@ import org.apache.hadoop.io.IOUtils;
 import org.apache.hadoop.io.SequenceFile;
 import org.apache.hadoop.io.SequenceFile.CompressionType;
 import org.apache.hadoop.io.SequenceFile.Reader;
+import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 
 import cheryl.hadooputil.TransformtoUtf8;
 
@@ -26,7 +27,6 @@ public class TestSF {
 		
 		 //输入路径：文件夹
 		 FileStatus[] files = fs.listStatus(new Path(args[0]));
-		
 		 Text key = new Text();
 		 Text value = new Text();
 		
@@ -36,7 +36,7 @@ public class TestSF {
 		 InputStream in = null;
 		 byte[] buffer = null;
 		 for(int i=0;i<files.length;i++){
-		 key.set(files[i].getPath().getName());
+		 key.set(files[i].getPath().toString());
 		 in = fs.open(files[i].getPath());
 		 buffer = new byte[(int) files[i].getLen()];
 		 IOUtils.readFully(in, buffer, 0, buffer.length);
