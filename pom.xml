@@ -48,11 +48,6 @@
 			<version>2.7.3</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.hbase</groupId>
-			<artifactId>hbase</artifactId>
-			<version>0.94.7</version>
-		</dependency>
-		<dependency>
 			<groupId>jdk.tools</groupId>
 			<artifactId>jdk.tools</artifactId>
 			<version>1.8</version>
@@ -69,7 +64,12 @@
 			<artifactId>zkclient</artifactId>
 			<version>0.4</version>
 		</dependency>
-
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+	
 	</dependencies>
 	<build>
 		<plugins>
@@ -81,7 +81,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>cheryl.dhcc.mapreduce.MapReduceReadFile</mainClass>
+							<mainClass>cheryl.dhcc.mapreduce.MRSQFAWord</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>

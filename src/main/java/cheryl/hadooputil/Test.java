@@ -6,7 +6,7 @@ import java.nio.file.Path;
 public class Test {
 	public static void main(String[] args) throws Exception {
 		File file=new File("E://medical_data");
-		FileUtils.getFiles(file);
+		HFileUtils.getFiles(file);
 		
 
 	}

@@ -16,7 +16,7 @@ public class UploadFile {
 	 URI uri=new URI("hdfs://hadoop:8020");
 	 FileSystem fs=FileSystem.get(uri, conf);
 	 //本地路径
-	 String localPath="E://medical_data//xml-00-0-0//0000986562_4_0000986562_知情文件00040007.xml";
+	 String localPath="c://devlist.txt";
 	 String hdfsPath="/user/dhcc";
 	 Path resP=new Path(localPath);
 	 //hdfs路径

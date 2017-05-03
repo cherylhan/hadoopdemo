@@ -10,7 +10,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
-import org.apache.hadoop.hbase.client.Connection;
+//import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.hadoop.hbase.client.HConnectionManager;
@@ -44,7 +44,7 @@ import org.apache.hadoop.hbase.util.Bytes;
  * 
  * 注意eclipse端的hbase和服务器端的hbase版本需要一致 否则容易出现乱码 Not a host:port pair: PBUF hbase
  * hbase-1.1.2.2.5.3.0-37.jar
- * 
+ * maven 中下載hbase包失敗  以hbase liarbry形式dao導入 版本1.3.0
  * 过滤器 在服务器端处理
  *  HTable 不是线程安全的           
  * pageFiler 分页 
@@ -102,7 +102,7 @@ public class HBaseTestCase {
 	
 	//show all data
 	public static void scan(String tablename,String data)throws Exception{
-		HTableInterface table =getTable(tablename);
+		HTableInterface table =new HTable(cfg, tablename);
 		RowFilter rf=new RowFilter(CompareOp.EQUAL,
 				new SubstringComparator(data));
 			Scan s=new Scan();
@@ -169,7 +169,7 @@ public class HBaseTestCase {
     	 TBData tbData=null;
     	 try {
 			 //get hbase object from pool
-			 HTableInterface table =getTable(tableName);
+			 HTableInterface table =new HTable(cfg, tableName);
 			 RowFilter filter=new RowFilter(CompareOp.EQUAL,new BinaryComparator(data.getBytes()));
 			 Scan scan=new Scan();
 			 scan.setFilter(filter);
@@ -191,7 +191,7 @@ public class HBaseTestCase {
 //				 Map<byte[],byte[]> fmap=packFamilyMap(result);
 //				 Map<String,String> rmap=packRowMap(fmap);
 				 String id=Bytes.toString(result.getRow());
-				 String count=Bytes.toString(result.getValue(getBytes("course"), getBytes("english")));
+				 String count=Bytes.toString(result.getValue(getBytes("course"), getBytes("math")));
 				 HbaseTask task=new HbaseTask();
 				 task.setRow(id);
 				 task.setCount(count);
@@ -240,7 +240,7 @@ public class HBaseTestCase {
     	for(byte[] row:rowlist){
     		Get get=new Get(row);
 
-    		get.addColumn(getBytes("course"), getBytes("english"));
+    		get.addColumn(getBytes("course"), getBytes("math"));
 
     		list.add(get);
     	}
@@ -252,10 +252,10 @@ public class HBaseTestCase {
     
     
     public static void main(String[] args) throws Exception{
-    	String tablename="scores";
-    	String columnFamily="course";
+    	String tablename="dhcc_xml";
+    	String columnFamily="cf";
 //   	try {
-//	成功		HBaseTestCase.create(tablename, columnFamily);
+			HBaseTestCase.create(tablename, columnFamily);
     //  成功 	HBaseTestCase.put(tablename, "jim", columnFamily, "chinese", "90");
 //  成功		HBaseTestCase.get(tablename, "Tom");
 // 	yes		HBaseTestCase.scan(tablename, "Tom");
@@ -271,13 +271,13 @@ public class HBaseTestCase {
       
     	
 //
-    	String data="Tom";
-        TBData tb=HBaseTestCase.getDataMapRow(tablename,data);
-        for(HbaseTask task:tb.getResultList()){
-        	System.out.println("rowKey:"+task.getRow());
-        	System.out.println("count:"+task.getCount());
-        	
-        }
+//    	String data="Tom";
+//        TBData tb=HBaseTestCase.getDataMapRow(tablename,data);
+//        for(HbaseTask task:tb.getResultList()){
+//        	System.out.println("rowKey:"+task.getRow());
+//        	System.out.println("count:"+task.getCount());
+//        	
+//        }
     
 //    	
    }
